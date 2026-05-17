@@ -1,35 +1,46 @@
-import MaxWidthWrapper from "@/components/common/MaxMidthWrapper";
+import MaxMidthWrapper from "@/components/common/MaxMidthWrapper";
+import Dashboard from "@/components/Dashboard";
 import prisma from "@/lib/prisma";
-import { syncCurrentUser } from "@/lib/sync-user";
-import { redirect } from "next/navigation";
-import { NextResponse } from "next/server";
+
+
+import { auth } from "@clerk/nextjs/server";
+
+
 
 
 
 const Page = async () => {
 
-    //pushing user data to the database and fetching it for use in the dashboard
     try{
         const dbUser = await syncCurrentUser();
         if(!dbUser){
-            return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+            redirect("/");
         }
 
     }catch(error){
         console.error("Error fetching user data:", error);
-        return NextResponse.json({ error: "Failed to fetch user data" }, { status: 500 });      
+        redirect("/");
     }
-    //
+    //---------------------------------------------------------------------------
 
+   const { userId } = await auth();
 
+    const userData = await prisma.user.findFirst({
+        where:{
+            clerkUserId: userId,
+        },select:{
+            lessonPlans:true
+        }
+    });
 
-    
+    if(!userData){
+        redirect("/");
+    }
 
     return (
-        <MaxWidthWrapper>
-            <h1>Dashboard</h1>
-        </MaxWidthWrapper>
-
+        <MaxMidthWrapper className=" py-8 md:py-20">
+            <Dashboard lessonPlans={userData.lessonPlans}/>
+        </MaxMidthWrapper>
     )
 }
 
