@@ -1,6 +1,8 @@
 import MaxMidthWrapper from "@/components/common/MaxMidthWrapper";
 import Dashboard from "@/components/Dashboard";
 import prisma from "@/lib/prisma";
+import { redirect } from "next/navigation";
+import { syncCurrentUser } from "@/lib/sync-user";
 
 
 import { auth } from "@clerk/nextjs/server";
