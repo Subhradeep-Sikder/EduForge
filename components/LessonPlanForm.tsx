@@ -9,7 +9,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   BookOpen,
@@ -50,6 +50,10 @@ const LessonPlanForm = ({ isSubscribed }: { isSubscribed: boolean }) => {
   const handlePrev = () => setStep(step - 1);
 
   const handleInputChange = (field: string, value: string) => {
+    if (field === "objective") {
+      setIsLoading(false);
+    }
+
     if (field === "topic") {
       setCustomTopic("");
       setFormData({
@@ -83,7 +87,7 @@ const LessonPlanForm = ({ isSubscribed }: { isSubscribed: boolean }) => {
   };
 
   const clearSubtopic = () => {
-    setFormData({ ...formData, topic: "", subtopic: "" });
+    setFormData({ ...formData, subtopic: "" });
     setCustomSubtopic("");
   };
 
@@ -111,23 +115,26 @@ const LessonPlanForm = ({ isSubscribed }: { isSubscribed: boolean }) => {
 
   const isFormComplete = () => {
     const { topic, subtopic, duration, studentLevel, objective } = formData;
+
+    let result;
+
     if (isSubscribed) {
-      return (
+      result =
         ((customTopic !== "" && customSubtopic !== "") ||
           (topic !== "" && subtopic !== "")) &&
         duration !== "" &&
         studentLevel !== "" &&
-        objective !== ""
-      );
+        objective !== "";
     } else {
-      return (
+      result =
         topic !== "" &&
         subtopic !== "" &&
         duration !== "" &&
         studentLevel !== "" &&
-        objective !== ""
-      );
+        objective !== "";
     }
+
+    return result;
   };
 
   useEffect(() => {
@@ -223,7 +230,7 @@ const LessonPlanForm = ({ isSubscribed }: { isSubscribed: boolean }) => {
                   <Input
                     placeholder="Enter custom subtopic"
                     value={customSubtopic}
-                    onChange={(e) => handleCustomTopicChange(e.target.value)}
+                    onChange={(e) => handleCustomSubtopicChange(e.target.value)}
                     className="w-full"
                   />
                 </div>
@@ -280,6 +287,7 @@ const LessonPlanForm = ({ isSubscribed }: { isSubscribed: boolean }) => {
               <Select
                 name="duration"
                 onValueChange={(value) => handleInputChange("duration", value)}
+                value={formData.duration}
               >
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder="choose a duration" />
@@ -309,10 +317,11 @@ const LessonPlanForm = ({ isSubscribed }: { isSubscribed: boolean }) => {
             </motion.div>
             <motion.div>
               <Select
-                name="duration"
+                name="studentLevel"
                 onValueChange={(value) =>
                   handleInputChange("studentLevel", value)
                 }
+                value={formData.studentLevel}
               >
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder="choose the students level" />
@@ -357,9 +366,32 @@ const LessonPlanForm = ({ isSubscribed }: { isSubscribed: boolean }) => {
     }
   };
 
+  const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsLoading(true);
+    const fromDataToSubmit = new FormData();
+
+    Object.entries(formData).forEach(([key, value]) => {
+      fromDataToSubmit.append(key, value);
+    });
+
+    if (isSubscribed) {
+      if (customTopic) fromDataToSubmit.set("topic", customTopic);
+      if (customSubtopic) fromDataToSubmit.set("subtopic", customSubtopic);
+    }
+    console.log("Form Data:", Object.fromEntries(fromDataToSubmit.entries()));
+
+    try {
+      //make logic to submit the form
+    } catch (error) {}
+    finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <Card className="relative overflow-hidden">
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500" />{" "}
         <CardHeader>
           <CardTitle className="text-3xl font-bold text-center">
@@ -378,41 +410,44 @@ const LessonPlanForm = ({ isSubscribed }: { isSubscribed: boolean }) => {
             ))}
           </div>
           <AnimatePresence mode="wait">{renderStep()}</AnimatePresence>
-          <motion.div
-            className="mt-6 justify-between"
-            initial="hidden"
-            animate="visible"
-          >
-            {step > 1 && (
-              <motion.div>
-                <Button onClick={handlePrev} variant={"outline"}>
-                  Previous
+          <motion.div className="mt-6" initial="hidden" animate="visible">
+            {step < 5 ? (
+              <div className="flex items-center justify-between">
+                <div>
+                  {step > 1 && (
+                    <Button type="button" onClick={handlePrev} variant="outline">
+                      Previous
+                    </Button>
+                  )}
+                </div>
+                <Button
+                  type="button"
+                  onClick={handleNext}
+                  disabled={!isStepValid(step)}
+                >
+                  Next
                 </Button>
-                
+              </div>
+            ) : (
+              <motion.div className="grid grid-cols-3 items-center">
+                <div className="justify-self-start">
+                  <Button type="button" onClick={handlePrev} variant="outline">
+                    Previous
+                  </Button>
+                </div>
+                <div className="justify-self-center">
+                  <Button
+                    type="submit"
+                    className="bg-green-500 hover:bg-green-600 "
+                    disabled={!isFormComplete() || isLoading}
+                  >
+                    <Sparkles className="w-5 h-5 mr-2 animate-pulse" />
+                    Generate Lesson Plan
+                  </Button>
+                </div>
+                <div />
               </motion.div>
             )}
-            {step < 5 ? (
-                  <Button
-                    onClick={handleNext}
-                    disabled={!isStepValid(step)}
-                    className={buttonVariants({
-                      variant: "default",
-                      className: "ml-auto",
-                    })}
-                  >
-                    Next
-                  </Button>
-                ) : (
-                  <motion.div className="ml-auto">
-                    <Button
-                      type="submit"
-                      className="bg-green-500 hover:bg-green-600 "
-                    >
-                      <Sparkles className="w-5 h-5 mr-2 animate-pulse" />
-                      Generate Lesson Plan
-                    </Button>
-                  </motion.div>
-                )}
           </motion.div>
         </CardContent>
       </form>
