@@ -25,6 +25,7 @@ import { useRouter } from "next/navigation";
 import { subtopics, topics, durations, studentLevels } from "@/constants";
 import { toast } from "sonner";
 import { form, object, sub } from "framer-motion/client";
+import { containerVariants, itemVariants } from "@/lib/animations";
 
 const LessonPlanForm = ({ isSubscribed }: { isSubscribed: boolean }) => {
   const router = useRouter();
@@ -155,13 +156,17 @@ const LessonPlanForm = ({ isSubscribed }: { isSubscribed: boolean }) => {
             initial="hidden"
             animate="visible"
             exit="exit"
+            variants={containerVariants}
           >
-            <motion.div className="flex items-center mb-4">
+            <motion.div className="flex items-center mb-4"
+            variants={itemVariants}
+            >
               <BookOpen className="w-6 h-6 mr-2 text-blue-500" />
               <h2 className="text-2xl font-bold">Select Topic</h2>
             </motion.div>
 
-            <motion.div>
+            <motion.div
+            variants={itemVariants}>
               {isSubscribed && (
                 <div className="space-y-4 mb-4">
                   <Input
@@ -219,12 +224,16 @@ const LessonPlanForm = ({ isSubscribed }: { isSubscribed: boolean }) => {
             initial="hidden"
             animate="visible"
             exit="exit"
+            variants={containerVariants}
           >
-            <motion.div className="flex items-center mb-4">
+            <motion.div className="flex items-center mb-4"
+            variants={itemVariants}
+            >
               <BookmarkIcon className="w-6 h-6 mr-2 text-indigo-500" />
               <h2 className="text-2xl font-bold">Select Subtopic</h2>
             </motion.div>
-            <motion.div>
+            <motion.div
+            variants={itemVariants}>
               {isSubscribed && customTopic !== "" && (
                 <div className="space-y-4 mb-4">
                   <Input
@@ -278,12 +287,15 @@ const LessonPlanForm = ({ isSubscribed }: { isSubscribed: boolean }) => {
             initial="hidden"
             animate="visible"
             exit="exit"
+            variants={containerVariants}
           >
-            <motion.div className="flex items-center mb-4">
+            <motion.div className="flex items-center mb-4"
+            variants={itemVariants}>
               <Clock className="w-6 h-6 mr-2 text-green-500" />
               <h2 className="text-2xl font-bold">Select Duration</h2>
             </motion.div>
-            <motion.div>
+            <motion.div
+            variants={itemVariants}>
               <Select
                 name="duration"
                 onValueChange={(value) => handleInputChange("duration", value)}
@@ -310,12 +322,15 @@ const LessonPlanForm = ({ isSubscribed }: { isSubscribed: boolean }) => {
             initial="hidden"
             animate="visible"
             exit="exit"
+            variants={containerVariants}
           >
-            <motion.div className="flex items-center mb-4">
+            <motion.div className="flex items-center mb-4"
+            variants={itemVariants}>
               <GraduationCap className="w-6 h-6 mr-2 text-blue-500" />
               <h2 className="text-2xl font-bold">Select Student level</h2>
             </motion.div>
-            <motion.div>
+            <motion.div
+            variants={itemVariants}>
               <Select
                 name="studentLevel"
                 onValueChange={(value) =>
@@ -344,12 +359,15 @@ const LessonPlanForm = ({ isSubscribed }: { isSubscribed: boolean }) => {
             initial="hidden"
             animate="visible"
             exit={"exit"}
+            variants={containerVariants}
           >
-            <motion.div className="flex items-center mb-4">
+            <motion.div className="flex items-center mb-4"
+            variants={itemVariants}>
               <Target className="w-6 h-6 mr-2 text-purple-500" />
               <h2 className="text-2xl font-bold">Enter lesson objective</h2>
             </motion.div>
-            <motion.div>
+            <motion.div
+            variants={itemVariants}>
               <Input
                 placeholder="Enter the lesson objective (max 100 characters)"
                 max={100}
