@@ -158,15 +158,15 @@ const LessonPlanForm = ({ isSubscribed }: { isSubscribed: boolean }) => {
             exit="exit"
             variants={containerVariants}
           >
-            <motion.div className="flex items-center mb-4"
-            variants={itemVariants}
+            <motion.div
+              className="flex items-center mb-4"
+              variants={itemVariants}
             >
               <BookOpen className="w-6 h-6 mr-2 text-blue-500" />
               <h2 className="text-2xl font-bold">Select Topic</h2>
             </motion.div>
 
-            <motion.div
-            variants={itemVariants}>
+            <motion.div variants={itemVariants}>
               {isSubscribed && (
                 <div className="space-y-4 mb-4">
                   <Input
@@ -226,14 +226,14 @@ const LessonPlanForm = ({ isSubscribed }: { isSubscribed: boolean }) => {
             exit="exit"
             variants={containerVariants}
           >
-            <motion.div className="flex items-center mb-4"
-            variants={itemVariants}
+            <motion.div
+              className="flex items-center mb-4"
+              variants={itemVariants}
             >
               <BookmarkIcon className="w-6 h-6 mr-2 text-indigo-500" />
               <h2 className="text-2xl font-bold">Select Subtopic</h2>
             </motion.div>
-            <motion.div
-            variants={itemVariants}>
+            <motion.div variants={itemVariants}>
               {isSubscribed && customTopic !== "" && (
                 <div className="space-y-4 mb-4">
                   <Input
@@ -289,13 +289,14 @@ const LessonPlanForm = ({ isSubscribed }: { isSubscribed: boolean }) => {
             exit="exit"
             variants={containerVariants}
           >
-            <motion.div className="flex items-center mb-4"
-            variants={itemVariants}>
+            <motion.div
+              className="flex items-center mb-4"
+              variants={itemVariants}
+            >
               <Clock className="w-6 h-6 mr-2 text-green-500" />
               <h2 className="text-2xl font-bold">Select Duration</h2>
             </motion.div>
-            <motion.div
-            variants={itemVariants}>
+            <motion.div variants={itemVariants}>
               <Select
                 name="duration"
                 onValueChange={(value) => handleInputChange("duration", value)}
@@ -324,13 +325,14 @@ const LessonPlanForm = ({ isSubscribed }: { isSubscribed: boolean }) => {
             exit="exit"
             variants={containerVariants}
           >
-            <motion.div className="flex items-center mb-4"
-            variants={itemVariants}>
+            <motion.div
+              className="flex items-center mb-4"
+              variants={itemVariants}
+            >
               <GraduationCap className="w-6 h-6 mr-2 text-blue-500" />
               <h2 className="text-2xl font-bold">Select Student level</h2>
             </motion.div>
-            <motion.div
-            variants={itemVariants}>
+            <motion.div variants={itemVariants}>
               <Select
                 name="studentLevel"
                 onValueChange={(value) =>
@@ -361,13 +363,14 @@ const LessonPlanForm = ({ isSubscribed }: { isSubscribed: boolean }) => {
             exit={"exit"}
             variants={containerVariants}
           >
-            <motion.div className="flex items-center mb-4"
-            variants={itemVariants}>
+            <motion.div
+              className="flex items-center mb-4"
+              variants={itemVariants}
+            >
               <Target className="w-6 h-6 mr-2 text-purple-500" />
               <h2 className="text-2xl font-bold">Enter lesson objective</h2>
             </motion.div>
-            <motion.div
-            variants={itemVariants}>
+            <motion.div variants={itemVariants}>
               <Input
                 placeholder="Enter the lesson objective (max 100 characters)"
                 max={100}
@@ -401,10 +404,62 @@ const LessonPlanForm = ({ isSubscribed }: { isSubscribed: boolean }) => {
 
     try {
       //make logic to submit the form
-    } catch (error) {}
-    finally {
-      setIsLoading(false);
-    }
+    } catch (error) {
+    } 
+  };
+
+  const renderLoadingAnimation = () => {
+    return (
+      <motion.div
+        className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+      >
+        <motion.div
+          className="w-full max-w-md rounded-2xl border border-slate-200 bg-white/95 p-8 shadow-2xl dark:border-slate-800 dark:bg-slate-950/95"
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ type: "spring", stiffness: 200, damping: 20 }}
+        >
+          <div className="flex flex-col items-center text-center gap-4">
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ repeat: Infinity, duration: 2, ease: "linear" }}
+            >
+              <Loader2 className="h-16 w-16 text-indigo-600 dark:text-indigo-400" />
+            </motion.div>
+
+            <motion.h2
+              className="text-2xl font-bold text-slate-950 dark:text-slate-50"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+            >
+              Create Your Lesson Plan
+            </motion.h2>
+
+            <motion.p
+              className="max-w-sm text-sm leading-6 text-slate-700 dark:text-slate-300"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.45 }}
+            >
+              Our AI is working its magic to create the perfect lesson plan for you!
+            </motion.p>
+          </div>
+
+          <div className="mt-8 h-1 w-full overflow-hidden rounded-full bg-slate-200 dark:bg-slate-800">
+            <motion.div
+              className="h-full rounded-full bg-indigo-600 dark:bg-indigo-400"
+              initial={{ width: "0%" }}
+              animate={{ width: "100%" }}
+              transition={{ duration: 3, ease: "easeInOut" }}
+            />
+          </div>
+        </motion.div>
+      </motion.div>
+    );
   };
 
   return (
@@ -433,7 +488,11 @@ const LessonPlanForm = ({ isSubscribed }: { isSubscribed: boolean }) => {
               <div className="flex items-center justify-between">
                 <div>
                   {step > 1 && (
-                    <Button type="button" onClick={handlePrev} variant="outline">
+                    <Button
+                      type="button"
+                      onClick={handlePrev}
+                      variant="outline"
+                    >
                       Previous
                     </Button>
                   )}
@@ -468,6 +527,9 @@ const LessonPlanForm = ({ isSubscribed }: { isSubscribed: boolean }) => {
             )}
           </motion.div>
         </CardContent>
+        <AnimatePresence>
+          {isLoading && renderLoadingAnimation()}
+        </AnimatePresence>
       </form>
     </Card>
   );
