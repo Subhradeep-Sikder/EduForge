@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { syncCurrentUser } from "@/lib/sync-user";
 import AnimatedTitle from "@/components/AnimatedTitle";
+import LessonPlanForm from "@/components/LessonPlanForm";
 
 const Page = async () => {
   try {
@@ -18,7 +19,7 @@ const Page = async () => {
     <div className="min-h-screen  from-purple-50 to-blue-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto">
         <AnimatedTitle title="Create Your" subtitle="Lesson Plan" />
-        {/* <LessonPlanForm /> */}
+        <LessonPlanForm isSubscribed={true} />
       </div>
     </div>
   );
