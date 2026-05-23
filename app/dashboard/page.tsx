@@ -27,6 +27,10 @@ const Page = async () => {
 
    const { userId } = await auth();
 
+   if (!userId) {
+       redirect("/");
+   }
+
     const userData = await prisma.user.findFirst({
         where:{
             clerkUserId: userId,

@@ -24,8 +24,8 @@ import {
 import { useRouter } from "next/navigation";
 import { subtopics, topics, durations, studentLevels } from "@/constants";
 import { toast } from "sonner";
-import { form, object, sub } from "framer-motion/client";
 import { containerVariants, itemVariants } from "@/lib/animations";
+import { CreateLessonPlan } from "@/app/create/actions";
 
 const LessonPlanForm = ({ isSubscribed }: { isSubscribed: boolean }) => {
   const router = useRouter();
@@ -387,7 +387,7 @@ const LessonPlanForm = ({ isSubscribed }: { isSubscribed: boolean }) => {
     }
   };
 
-  const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
     const fromDataToSubmit = new FormData();
@@ -403,9 +403,25 @@ const LessonPlanForm = ({ isSubscribed }: { isSubscribed: boolean }) => {
     console.log("Form Data:", Object.fromEntries(fromDataToSubmit.entries()));
 
     try {
-      //make logic to submit the form
+      const response = await CreateLessonPlan(fromDataToSubmit);
+      if (response?.success) {
+        toast.success("Lesson plan created successfully!");
+        router.push("/dashboard");
+      } else {
+        toast.error("Failed to create lesson plan. Please try again.");
+      }
+
+
+
+
+
     } catch (error) {
-    } 
+      console.error("Error creating lesson plan:", error);
+      toast.error("Failed to create lesson plan. Please try again.");
+    
+    } finally{
+      setIsLoading(false);
+    }
   };
 
   const renderLoadingAnimation = () => {

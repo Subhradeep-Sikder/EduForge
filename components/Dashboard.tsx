@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/select";
 import { buttonVariants } from "./ui/button";
 import { Package, Settings } from "lucide-react";
-import type { LessonPlan } from "@prisma/client";
+import type { LessonPlan } from "@/generated/prisma/client";
 
 
 
