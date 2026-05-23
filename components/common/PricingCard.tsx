@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import {
   Card,
   CardContent,
@@ -9,6 +10,7 @@ import {
 } from "@/components/ui/card";
 import { CheckIcon } from "lucide-react";
 import { Button } from "../ui/button";
+
 
 const PricingCard = ({
   tier,
@@ -41,14 +43,14 @@ const PricingCard = ({
         </ul>
       </CardContent>
       <CardFooter>
-        <Button
-        className="w-full"
-        variant={index === 1 ? "default" : "outline"}
-        >{
-          index === 0 ?"Get Started" : "Upgrade To Pro"
-        }
-
-        </Button>
+        <Link href={index === 0 ? "/sign-in" : "/pricing"} className="w-full">
+          <Button
+            className="w-full"
+            variant={index === 1 ? "default" : "outline"}
+          >
+            {index === 0 ? "Get Started" : "Upgrade To Pro"}
+          </Button>
+        </Link>
       </CardFooter>
 
     </Card>
