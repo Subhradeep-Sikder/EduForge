@@ -1,166 +1,156 @@
-# 📚 EduForge - AI-Powered Lesson Planner
+# 📚 EduForge — AI-Powered Lesson Planner
 
-## 🎯 What is EduForge?
+EduForge is an intelligent, modern web application designed to help educators, teachers, and instructors generate comprehensive, structured, and customized lesson plans in seconds. 
 
-EduForge is a web app that helps teachers create lesson plans super fast using AI. Instead of spending hours planning lessons, you just tell it what topic and subject you want, and it generates a full lesson plan with sections, duration, and everything. It's basically a time-saver for busy teachers.
+By leveraging the power of advanced Generative AI (Google Gemini), EduForge takes the tedious and time-consuming task of drafting lesson plans and turns it into a simple, multi-step process. Teachers can spend less time writing paperwork and more time doing what they do best: teaching!
 
-The whole idea came from noticing how much time teachers spend just planning lessons. EduForge takes that boring work and lets AI handle the heavy lifting so you can focus on actual teaching.
+---
 
-## ✨ Key Features
+## 🌟 Key Benefits
 
-- 🤖 **AI-Generated Lesson Plans** - Just fill out a simple form (topic, duration, student level, objectives) and the AI creates a structured lesson plan for you
-- 📖 **Multiple Subjects** - Covers Math, Science, History, Literature, and Art with tons of subtopics for each
-- 💾 **Save & Access Later** - All your generated lesson plans are saved to your dashboard so you can come back to them anytime
-- ✏️ **Customizable Content** - You can specify student level, lesson duration, and learning objectives to tailor the lesson to your needs
-- 🌙 **Dark Mode Support** - Because who doesn't like dark mode these days?
-- 🔐 **Easy Authentication** - Sign up with your email using Clerk, no complicated setup needed
+*   **⏱️ Fast Generation:** Creates full lesson plans in under 30 seconds.
+*   **🎯 Tailored Lessons:** Adapts to any subject, grade level, and duration.
+*   **📖 Timed Outlines:** Schedules class activities and discussions automatically.
+*   **📁 Dashboard Storage:** Saves all plans in one place for easy reuse.
+
+---
+
+## 📖 User Guide
+
+1. **Login:** Sign up or sign in securely via Clerk.
+2. **Open Form:** Click **Create Lesson Plan** in the navbar.
+3. **Fill Wizard (5 Steps):** Set Topic, Subtopic, Duration, Student Level, and Learning Objective.
+4. **Generate:** Click **Generate** to prompt the Gemini AI.
+5. **View & Reuse:** Read the timed lesson layout and access it anytime from your **Dashboard**.
+
+---
 
 ## 🛠️ Tech Stack
 
-- **Frontend:** Next.js 16, React 19, Tailwind CSS 4, Framer Motion for animations
-- **Backend:** Node.js with Next.js API routes
-- **Database:** PostgreSQL with Prisma ORM
-- **AI:** Google Generative AI (Gemini) for generating lesson plans
-- **Authentication:** Clerk for user management
-- **UI Components:** Shadcn UI + Lucide React icons
-- **Forms & Validation:** Zod for schema validation
+*   **Frontend:** Next.js 16 (React 19), Tailwind CSS 4
+*   **Database & ORM:** PostgreSQL & Prisma ORM
+*   **Authentication:** Clerk
+*   **AI Engine:** Google Gemini API (`@google/generative-ai`)
+
+---
 
 ## 📸 Screenshots & UI Preview
 
-### 🏠 Home Page - Landing Page
-![Home Page 1](./screenshot/home_1.png)
-![Home Page 2](./screenshot/home_2.png)
-![Home Page 3](./screenshot/home_3.png)
+<table width="100%">
+  <tr>
+    <td valign="top" width="50%">
+      <p align="center"><b>🏠 Landing Page (Header)</b></p>
+      <img src="./screenshot/home_1.png" alt="Home Page Header" style="max-width:100%; border-radius:8px;"/>
+    </td>
+    <td valign="top" width="50%">
+      <p align="center"><b>✨ Landing Page (Features)</b></p>
+      <img src="./screenshot/home_2.png" alt="Home Page Features" style="max-width:100%; border-radius:8px;"/>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top" width="50%">
+      <p align="center"><b>💬 Landing Page (Reviews)</b></p>
+      <img src="./screenshot/home_3.png" alt="Home Page Reviews" style="max-width:100%; border-radius:8px;"/>
+    </td>
+    <td valign="top" width="50%">
+      <p align="center"><b>✍️ Lesson Plan Creator Wizard</b></p>
+      <img src="./screenshot/create_form.png" alt="Create Form Wizard" style="max-width:100%; border-radius:8px;"/>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top" width="50%">
+      <p align="center"><b>📊 Educator Dashboard</b></p>
+      <img src="./screenshot/dashboard.png" alt="Dashboard" style="max-width:100%; border-radius:8px;"/>
+    </td>
+    <td valign="top" width="50%">
+      <p align="center"><b>💰 Tiered Pricing Plans</b></p>
+      <img src="./screenshot/pricing_page.png" alt="Pricing Page" style="max-width:100%; border-radius:8px;"/>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top" width="50%">
+      <p align="center"><b>📖 Detailed Lesson View (Part 1)</b></p>
+      <img src="./screenshot/view_of_individual_lesson_plan.png" alt="Lesson Plan View 1" style="max-width:100%; border-radius:8px;"/>
+    </td>
+    <td valign="top" width="50%">
+      <p align="center"><b>📖 Detailed Lesson View (Part 2)</b></p>
+      <img src="./screenshot/view_of_individual_lesson_plan_2.png" alt="Lesson Plan View 2" style="max-width:100%; border-radius:8px;"/>
+    </td>
+  </tr>
+</table>
 
-### ✍️ Create Lesson Plan Form - Multi-Step Form
-![Create Form](./screenshot/create_form.png)
-
-### 📊 Dashboard - View All Your Lesson Plans
-![Dashboard](./screenshot/dashboard.png)
-
-### 💰 Pricing Page
-![Pricing Page](./screenshot/pricing_page.png)
-
-### 📖 Individual Lesson Plan View
-![Lesson Plan View 1](./screenshot/view_of_individual_lesson_plan.png)
-![Lesson Plan View 2](./screenshot/view_of_individual_lesson_plan_2.png)
+---
 
 ## 🚀 How to Set Up Locally
 
-### 📋 Prerequisites
-You'll need Node.js (v18+) and npm/yarn installed. Also make sure you have PostgreSQL running locally or have a connection string ready.
-
-### 1️⃣ Clone and Install
+### 1. Clone the Project & Install Dependencies
 ```bash
 git clone https://github.com/Subhradeep-Sikder/EduForge.git
 cd EduForge
 npm install
 ```
 
-### 2️⃣ Set Up Environment Variables
-Create a `.env.local` file in the root and add these (get them from the services):
+### 2. Configure Environment Variables
+Create a `.env` file in the project's root directory and define the following variables:
 
-```
+```env
 # Clerk Authentication
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
-CLERK_SECRET_KEY=
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+CLERK_SECRET_KEY=your_clerk_secret_key
 NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
 NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
 NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL=/
 NEXT_PUBLIC_CLERK_SIGN_UP_FALLBACK_REDIRECT_URL=/
 
-# Database
-DATABASE_URL=
+# PostgreSQL Database Connection
+DATABASE_URL=your_postgresql_database_url
 
-# AI
-GEMINI_API_KEY=
+# Google Gemini API Key
+GEMINI_API_KEY=your_gemini_api_key
 ```
+Get keys: [Gemini API Key](https://aistudio.google.com/app/apikey) | [Prisma Console (Database)](https://console.prisma.io) | [Clerk Dashboard (Auth)](https://clerk.com)
 
-To get these keys:
-- **Clerk**: Sign up at [clerk.com](https://clerk.com), create an application, grab your keys from the dashboard
-- **Gemini API**: Go to [Google AI Studio](https://aistudio.google.com/app/apikey) and create a new API key
-- **PostgreSQL**: Either install locally or use a service like Railway, Render, or Supabase
-
-### 3️⃣ Set Up Database
+### 3. Setup Database Schema & Run
+Sync the database tables and start the Next.js development server:
 ```bash
 npx prisma migrate dev --name init
-```
-
-This creates your database tables based on the schema.
-
-### 4️⃣ Run the Dev Server
-```bash
 npm run dev
 ```
-
-Open [http://localhost:3000](http://localhost:3000) in your browser and you're good to go. Sign up, create a lesson plan, and watch it work.
-
-### 🏭 Building for Production
-```bash
-npm run build
-npm start
-```
-
-## 🔄 How It Works (Really Quick Version)
-
-1. User signs up with Clerk auth
-2. Creates an account in the database
-3. Goes to `/create` page and fills out the lesson plan form (5 steps)
-4. Hits "Generate" button
-5. Form data goes to our backend which sends it to Gemini AI
-6. AI generates a full lesson plan with multiple sections
-7. Plan gets saved to PostgreSQL database
-8. User can view it on their dashboard and open individual plans to see full content
-
-## 🎯 What's Coming Next
-
-**💳 Stripe Integration for Subscriptions** - Right now everything is free. Planning to add:
-- Usage limits and quotas based on subscription level
-
-The code for this is partially there (you can see the `stripe_customer_id` field in the User model), but the full payment flow and subscription logic still needs to be wired up.
-
-## 📁 Project Structure
-
-```
-EduForge/
-├── app/
-│   ├── (auth)/              # Auth pages (sign in, sign up)
-│   ├── create/              # Lesson plan creation form
-│   ├── dashboard/           # User's saved lesson plans
-│   ├── plan/[id]/          # Individual lesson plan view
-│   ├── pricing/            # Pricing page
-│   └── layout.tsx          # Root layout
-├── components/
-│   ├── ui/                 # Shadcn UI components
-│   ├── common/             # Navbar, footer, etc.
-│   ├── LessonPlanForm.tsx  # Multi-step form component
-│   ├── Dashboard.tsx       # Shows user's saved plans
-│   └── Plan.tsx            # Shows full lesson plan details
-├── lib/
-│   ├── prisma.ts           # Prisma client
-│   └── animations.ts       # Framer motion variants
-├── prisma/
-│   └── schema.prisma       # Database schema
-└── constants.ts            # Topics, subtopics, durations, etc.
-```
-
-## 🗄️ Database Schema
-
-We have three main tables:
-- **👤 Users** - Stores user info and Clerk ID
-- **📝 LessonPlans** - The actual lesson plans with title, duration, subject, etc.
-- **📄 Sections** - Content sections within each lesson plan
-
-Pretty simple structure, nothing too crazy.
-
-
-
-## 📝 Notes
-
-- The AI-generated lesson plans depend on Gemini API response time. Sometimes it takes a few seconds.
-- Authentication is required for most features. You can only view your own lesson plans.
-- All data is stored securely in PostgreSQL
+Navigate to `http://localhost:3000` in your web browser.
 
 ---
 
-Built with ❤️.
+## 📂 Project Structure
+
+```text
+EduForge/
+├── app/                  # Next.js App Router folders
+│   ├── (auth)/           # Secure authentication routes
+│   ├── create/           # Multi-step creation form page
+│   ├── dashboard/        # Educator's dashboard
+│   ├── plan/[id]/        # Individual plan viewer
+│   ├── pricing/          # Premium subscription layouts
+│   └── layout.tsx        # App wrapper and navbar
+├── components/           # Reusable components
+│   ├── ui/               # Tailored Shadcn UI elements
+│   ├── common/           # Navigation headers and footers
+│   ├── LessonPlanForm.tsx# Creation wizard step logic
+│   └── Plan.tsx          # Presentation view for lessons
+├── lib/                  # Utilities (animations, prisma setup)
+├── prisma/               # Schema blueprints for database
+└── constants.ts          # Default subjects, durations, and levels
+```
+
+---
+
+## 🔮 Future Development Plans
+
+1.  **💳 Stripe Integration:** Turn on payment processing for premium levels. (Prisma schema already includes `stripe_customer_id`).
+2.  **📄 Export Options:** One-click exports to PDF, Word, or Markdown.
+3.  **🧠 Interactive Extras:** Auto-generate quizzes, homework, and activity worksheets.
+4.  **👥 Collaboration:** Shared folders and public links to send plans to colleagues.
+
+---
+
+<p align="center">Build with ❤️</p>
+
